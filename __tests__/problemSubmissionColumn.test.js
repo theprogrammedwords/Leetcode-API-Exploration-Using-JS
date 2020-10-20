@@ -1,6 +1,7 @@
 const utils = require('../utils/config');
 const { addSubmissionsToEachProblem } = require(utils.fileToTest);
 const webPage = require('../utils/webPage.json')
+const {expectOr} = require('../utils/utils')
 
 let allProblemsData = require('../utils/data.json');
 allProblemsData = transformData(allProblemsData.stat_status_pairs);
@@ -29,7 +30,10 @@ describe('Test adding number of submissions for each problem row', () => {
             expect(submissionColumn).not.toBeNull();
 
             let formatRegex = /[0-9]+\/[0-9]+/
-            expect(submissionColumn.innerText).toMatch(formatRegex);
+            expectOr(
+                () => expect(submissionColumn.innerText).toMatch(formatRegex),
+                () => expect(submissionColumn.textContent).toMatch(formatRegex)
+            )
         })
     });
 
@@ -46,9 +50,15 @@ describe('Test adding number of submissions for each problem row', () => {
             let problemExpectedData = getProblemDataByIdExpected(problemId, allProblems);
 
             let formatRegex = /[0-9]+\/[0-9]+/
-            expect(submissionColumn.innerText).toMatch(formatRegex);
-
-            let [totalAcs, totalSubmitted] = submissionColumn.innerText.split('/');
+            expectOr(
+                () => expect(submissionColumn.innerText).toMatch(formatRegex),
+                () => expect(submissionColumn.textContent).toMatch(formatRegex)
+            )
+            let submissionData = submissionColumn.innerText;
+            if (!submissionData || !submissionData.match(formatRegex)) {
+                submissionData = submissionColumn.textContent;
+            }
+            let [totalAcs, totalSubmitted] = submissionData.split('/');
 
             totalAcs = parseInt(totalAcs);
             totalSubmitted = parseInt(totalSubmitted);

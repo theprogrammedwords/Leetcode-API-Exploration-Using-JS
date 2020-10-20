@@ -2,6 +2,7 @@ const utils = require('../utils/config');
 const { createSubmissionColumnForLeetCode } = require(utils.fileToTest);
 const webPage = require('../utils/webPage.json')
 const fetchMockData = require('../utils/data.json');
+const {expectOr} = require('../utils/utils');
 
 const mockApiCall = (mockSuccessResponse) => {
     const mockJsonPromise = Promise.resolve(mockSuccessResponse); // 2
@@ -31,7 +32,10 @@ describe('Test the complete functionality of the script', () => {
 
         const strongElement = submissionElement.querySelector("strong");
         expect(strongElement).not.toBeNull();
-        expect(strongElement.innerText).toEqual("Submissions");
+        expectOr(
+            () => expect(strongElement.innerText.trim()).toEqual("Submissions"),
+            () => expect(strongElement.textContent.trim()).toEqual("Submissions")
+        )
 
         allProblemRowElements.forEach((rowElement) => {
             let submissionColumn = rowElement.querySelector("td:nth-child(8)");
@@ -40,9 +44,15 @@ describe('Test the complete functionality of the script', () => {
             let problemExpectedData = getProblemDataByIdExpected(problemId, allProblems);
 
             let formatRegex = /[0-9]+\/[0-9]+/
-            expect(submissionColumn.innerText).toMatch(formatRegex);
-
-            let [totalAcs, totalSubmitted] = submissionColumn.innerText.split('/');
+            expectOr(
+                () => expect(submissionColumn.innerText).toMatch(formatRegex),
+                () => expect(submissionColumn.textContent).toMatch(formatRegex)
+            )
+            let submissionData = submissionColumn.innerText;
+            if (!submissionData || !submissionData.match(formatRegex)) {
+                submissionData = submissionColumn.textContent;
+            }
+            let [totalAcs, totalSubmitted] = submissionData.split('/');
 
             totalAcs = parseInt(totalAcs);
             totalSubmitted = parseInt(totalSubmitted);

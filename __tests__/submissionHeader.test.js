@@ -1,6 +1,7 @@
 const utils = require('../utils/config');
 const { addSubmissionColumnHeader } = require(utils.fileToTest);
 const webPage = require('../utils/webPage.json')
+const {expectOr} = require('../utils/utils')
 
 describe('Test adding submissions header', () => {
     beforeEach(async () => {
@@ -18,11 +19,6 @@ describe('Test adding submissions header', () => {
         expect(submissionElement).not.toBeNull();
 
         expect(submissionElement.className.trim()).toEqual('reactable-th-status reactable-header-sortable');
-        expect(submissionElement.role.trim()).toEqual("button");
-
-        const strongElement = submissionElement.querySelector("strong");
-        expect(strongElement).not.toBeNull();
-        expect(strongElement.innerText).toEqual("Submissions");
     })
 
     it('should have the desired role', () => {
@@ -30,7 +26,11 @@ describe('Test adding submissions header', () => {
         const submissionElement = document.querySelector("#question-app > div > div:nth-child(2) > div.question-list-base > div.table-responsive.question-list-table > table > thead > tr > th:nth-child(8)");
         expect(submissionElement).not.toBeNull();
 
-        expect(submissionElement.role.trim()).toEqual("button");
+        expectOr(
+            () => expect(submissionElement.getAttribute('role').trim()).toEqual("button"),
+            () => expect(submissionElement.role.trim()).toEqual("button")
+        )
+
     })
 
     it('should have a <strong> child with correct column name', () => {
@@ -40,6 +40,9 @@ describe('Test adding submissions header', () => {
 
         const strongElement = submissionElement.querySelector("strong");
         expect(strongElement).not.toBeNull();
-        expect(strongElement.innerText).toEqual("Submissions");
+        expectOr(
+            () => expect(strongElement.innerText.trim()).toEqual("Submissions"),
+            () => expect(strongElement.textContent.trim()).toEqual("Submissions")
+        )
     })
 })
