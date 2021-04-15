@@ -3,6 +3,5 @@ node_modules
 *.lock
 .idea/
 *.log
-package-lock.json
 output/
 list.csv
