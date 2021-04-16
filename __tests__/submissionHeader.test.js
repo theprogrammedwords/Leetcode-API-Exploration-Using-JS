@@ -7,22 +7,22 @@ describe('Test adding submissions header', () => {
     beforeEach(async () => {
         document.body.innerHTML = webPage.body;
     })
-    it('should add header to the table head row', () => {
-        addSubmissionColumnHeader();
+    it('should add header to the table head row', async () => {
+        await addSubmissionColumnHeader();
         const submissionElement = document.querySelector("#question-app > div > div:nth-child(2) > div.question-list-base > div.table-responsive.question-list-table > table > thead > tr > th:nth-child(8)");
         expect(submissionElement).not.toBeNull();
 
     })
-    it('should have the desired className', () => {
-        addSubmissionColumnHeader();
+    it('should have the desired className', async () => {
+        await addSubmissionColumnHeader();
         const submissionElement = document.querySelector("#question-app > div > div:nth-child(2) > div.question-list-base > div.table-responsive.question-list-table > table > thead > tr > th:nth-child(8)");
         expect(submissionElement).not.toBeNull();
 
         expect(submissionElement.className.trim()).toEqual('reactable-th-status reactable-header-sortable');
     })
 
-    it('should have the desired role', () => {
-        addSubmissionColumnHeader();
+    it('should have the desired role', async () => {
+        await addSubmissionColumnHeader();
         const submissionElement = document.querySelector("#question-app > div > div:nth-child(2) > div.question-list-base > div.table-responsive.question-list-table > table > thead > tr > th:nth-child(8)");
         expect(submissionElement).not.toBeNull();
 
@@ -33,8 +33,8 @@ describe('Test adding submissions header', () => {
 
     })
 
-    it('should have a <strong> child with correct column name', () => {
-        addSubmissionColumnHeader();
+    it('should have a <strong> child with correct column name', async () => {
+        await addSubmissionColumnHeader();
         const submissionElement = document.querySelector("#question-app > div > div:nth-child(2) > div.question-list-base > div.table-responsive.question-list-table > table > thead > tr > th:nth-child(8)");
         expect(submissionElement).not.toBeNull();
 

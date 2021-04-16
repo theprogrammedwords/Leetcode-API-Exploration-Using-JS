@@ -7,16 +7,16 @@ describe('Test getting all table row elements', () => {
         document.body.innerHTML = webPage.body;
     })
 
-    it('should not return null or undefined', () => {
-        let tableRowElements = getAllProblemRowElements();
+    it('should not return null or undefined', async () => {
+        let tableRowElements = await getAllProblemRowElements();
         let expectedRowElements = getAllProblemRowElementsExpected();
         tableRowElements.sort();
         expectedRowElements.sort();
         expect(tableRowElements).not.toBeNull();
     })
 
-    it('should fetch the row elements for each problem in an Array', () => {
-        let tableRowElements = getAllProblemRowElements();
+    it('should fetch the row elements for each problem in an Array', async () => {
+        let tableRowElements = await getAllProblemRowElements();
         let expectedRowElements = getAllProblemRowElementsExpected();
         tableRowElements.sort();
         expectedRowElements.sort();

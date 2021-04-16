@@ -10,7 +10,7 @@ describe('Tests for getting top 100 problems', () => {
     it('', async () => {
         var problemData = require('../data.json');
         var topHundredProblemsMocked = getTopHundredProblemsMocked(problemData);
-        var topHundredProblemsReal = functions.getTopHundredProblems(problemData);
+        var topHundredProblemsReal = await functions.getTopHundredProblems(problemData);
         expect(topHundredProblemsReal).toEqual(topHundredProblemsMocked);
     });
 });

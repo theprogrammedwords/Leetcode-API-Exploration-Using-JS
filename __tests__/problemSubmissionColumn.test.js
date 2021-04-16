@@ -13,7 +13,7 @@ describe('Test adding number of submissions for each problem row', () => {
     it('should add a new td element in each row', async () => {
         let allProblemRowElements = getAllProblemRowElementsExpected()
 
-        addSubmissionsToEachProblem(allProblemRowElements, allProblemsData);
+        await addSubmissionsToEachProblem(allProblemRowElements, allProblemsData);
 
         allProblemRowElements.forEach((rowElement) => {
             let submissionColumn = rowElement.querySelector("td:nth-child(8)");
@@ -23,7 +23,7 @@ describe('Test adding number of submissions for each problem row', () => {
 
     it('should add data to each row in total_acs/total_submitted format', async () => {
         let allProblemRowElements = getAllProblemRowElementsExpected().filter(element => element !== undefined)
-        addSubmissionsToEachProblem(allProblemRowElements, allProblemsData);
+        await addSubmissionsToEachProblem(allProblemRowElements, allProblemsData);
 
         allProblemRowElements.forEach((rowElement) => {
             let submissionColumn = rowElement.querySelector("td:nth-child(8)");
@@ -41,7 +41,7 @@ describe('Test adding number of submissions for each problem row', () => {
         let allProblemRowElements = getAllProblemRowElementsExpected()
         let allProblems = allProblemsData;
 
-        addSubmissionsToEachProblem(allProblemRowElements, allProblems);
+        await addSubmissionsToEachProblem(allProblemRowElements, allProblems);
 
         allProblemRowElements.forEach((rowElement) => {
             let submissionColumn = rowElement.querySelector("td:nth-child(8)");
