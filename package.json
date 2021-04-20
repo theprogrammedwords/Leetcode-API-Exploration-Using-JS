@@ -5,7 +5,8 @@
   "main": "solution.js",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "mainRunner": "node -e 'require(\"./leetcode.js\").main()'"
   },
   "dependencies": {
     "axios": "^0.20.0",
