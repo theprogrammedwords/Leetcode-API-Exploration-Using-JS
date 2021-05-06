@@ -30,7 +30,9 @@ async function getAllProblems(apiUrl) {
 function getAllProblemRowElements() {
 }
 
-/* Step 5: Add "total_acs"/"total_submitted" to each row element of the table on the page. Iterate through each row element and add a new <td> containing the submission data in the provided format
+/* Step 5: Add "total_acs"/"total_submitted" to each row element of the table on the page. 
+        Iterate through each row element and add a new <td> containing the submission data in the provided format
+   Note: Use "innerHTML" or "textContent" to access element's content. Don't use "innerText"
  */
 function addSubmissionsToEachProblem(allProblemRowElements, allProblems) {
 }

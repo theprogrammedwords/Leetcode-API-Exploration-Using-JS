@@ -5,3 +5,4 @@ node_modules
 *.log
 output/
 list.csv
+problemsAll.json
