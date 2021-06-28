@@ -110,12 +110,13 @@ function addSubmissionsToEachProblem(allProblemRowElements, allProblems) {
 /* Step 6: Putting it all together
  */
 async function createSubmissionColumnForLeetCode() {
+  
   addSubmissionColumnHeader()
   let url = getApiUrl()
-  let allProblems =  getAllProblems(url)
-  let allProblemsData =  getAllProblemRowElements() 
-  addSubmissionsToEachProblem(allProblems,allProblemsData)
-  
+  let allProblems = await getAllProblems(url)
+  let allProblemsData = getAllProblemRowElements()
+  addSubmissionsToEachProblem(allProblemsData, allProblems)
+
 }
 
 /* Step 7: Additional code for making script tampermonkey ready. This is done so that the script is properly executed when we visit https://leetcode.com/problemset/all/
